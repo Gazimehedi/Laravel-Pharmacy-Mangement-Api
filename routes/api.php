@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DrugsController;
 use App\Http\Controllers\VendorController;
 
 /*
@@ -24,12 +25,17 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     // Route::post('me', 'AuthController@me');
 
 });
-Route::group(['middleware' => 'api'], function ($router) {
+Route::group(['middleware' => 'api'], function () {
     // Vendors
     Route::get('vendors', [VendorController::class,'list']);
     Route::post('vendor/create',[VendorController::class,'create']);
-    Route::get('vendor/edit/{id}',[VendorController::class,'edit']);
     Route::post('vendor/update/{id}',[VendorController::class,'update']);
     Route::delete('vendor/delete/{id}',[VendorController::class,'delete']);
+
+    // Drugs
+    Route::get('drugs', [DrugsController::class,'index']);
+    Route::post('drug/create',[DrugsController::class,'create']);
+    Route::put('drug/update/{id}',[DrugsController::class,'update']);
+    Route::delete('drug/delete/{id}',[DrugsController::class,'delete']);
 
 });
